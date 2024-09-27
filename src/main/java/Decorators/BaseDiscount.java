@@ -1,6 +1,5 @@
 package Decorators;
 
-import Entities.CustomerCart;
 import Entities.Product;
 
 import Component.Discount;
@@ -19,20 +18,20 @@ public abstract class BaseDiscount implements Discount {
     protected abstract String getDiscountDescription(Product product);
 
     @Override
-    public double apply(Product product, CustomerCart customerCart) {
+    public double apply(Product product) {
         double totalDiscount = 0.0;
         if (isApplicable(product)) {
             double discountAmount = calculateDiscount(product);
             totalDiscount += discountAmount;
         }
         if (nextDiscount != null) {
-            totalDiscount += nextDiscount.apply(product, customerCart);
+            totalDiscount += nextDiscount.apply(product);
         }
         return totalDiscount;
     }
 
     @Override
-    public String getDescription(Product product, CustomerCart customerCart) {
+    public String getDescription(Product product) {
         StringBuilder description = new StringBuilder();
 
         if (isApplicable(product)) {
@@ -40,7 +39,7 @@ public abstract class BaseDiscount implements Discount {
         }
 
         if (nextDiscount != null) {
-            String nextDescription = nextDiscount.getDescription(product, customerCart);
+            String nextDescription = nextDiscount.getDescription(product);
             if (!nextDescription.isEmpty()) {
                 if (description.length() > 0) {
                     description.append(", ");
