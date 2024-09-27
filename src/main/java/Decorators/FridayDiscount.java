@@ -7,7 +7,8 @@ import Component.Discount;
 import Entities.Product;
 
 public class FridayDiscount extends BaseDiscount{
-    public static final double FRIDAY_DISCOUNT_10PERCENT = 0.1;
+    private final double FRIDAY_DISCOUNT_10PERCENT = 0.1;
+    private final String FRIDAY_DESCRIPTION = "Friday discount: 10%";
     Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
     public FridayDiscount(Discount discount) {
@@ -21,7 +22,7 @@ public class FridayDiscount extends BaseDiscount{
 
     @Override
     protected String getDiscountDescription(Product product) {
-        return "Friday discount: 10%";
+        return FRIDAY_DESCRIPTION;
     }
 
     @Override
