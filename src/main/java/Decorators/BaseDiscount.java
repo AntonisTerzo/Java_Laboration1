@@ -3,9 +3,11 @@ package Decorators;
 import Entities.Product;
 
 import Component.Discount;
+import Component.NoDiscount;
 
 public abstract class BaseDiscount implements Discount {
     protected Discount nextDiscount;
+    private NoDiscount noDiscount;
 
     public BaseDiscount(Discount nextDiscount) {
         this.nextDiscount = nextDiscount;
@@ -36,6 +38,8 @@ public abstract class BaseDiscount implements Discount {
 
         if (isApplicable(product)) {
             description.append(getDiscountDescription(product));
+        }else {
+            description.append(noDiscount.getDescription(product));
         }
 
         if (nextDiscount != null) {
