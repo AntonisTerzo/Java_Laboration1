@@ -5,7 +5,7 @@ import Entities.Product;
 
 public class MilkDiscount extends BaseDiscount{
     private static final double MILK_DISCOUNT = 0.05; 
-    private static final String MILK_DESCRIPTION = "Milk discount: 5%";
+    private static final String MILK_DESCRIPTION = "Milk discount (5%)";
 
 
     public MilkDiscount(Discount discount) {
@@ -23,7 +23,7 @@ public class MilkDiscount extends BaseDiscount{
     }
 
     @Override
-    protected boolean isApplicable(Product product) {
+    public boolean isApplicable(Product product) {
         return product.name().toLowerCase().contains("milk");
     }
     

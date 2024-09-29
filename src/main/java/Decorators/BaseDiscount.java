@@ -3,17 +3,13 @@ package Decorators;
 import Entities.Product;
 
 import Component.Discount;
-import Component.NoDiscount;
 
 public abstract class BaseDiscount implements Discount {
     protected Discount nextDiscount;
-    private NoDiscount noDiscount;
 
     public BaseDiscount(Discount nextDiscount) {
         this.nextDiscount = nextDiscount;
     }
-
-    protected abstract boolean isApplicable(Product product);
 
     protected abstract double calculateDiscount(Product product);
 
@@ -38,20 +34,19 @@ public abstract class BaseDiscount implements Discount {
 
         if (isApplicable(product)) {
             description.append(getDiscountDescription(product));
-        }else {
-            description.append(noDiscount.getDescription(product));
         }
 
         if (nextDiscount != null) {
             String nextDescription = nextDiscount.getDescription(product);
             if (!nextDescription.isEmpty()) {
-                if (description.length() > 0) {
-                    description.append(", ");
+                if (!nextDescription.equals("No eligible discounts")) {
+                    if (description.length() > 0) {
+                        description.append(" and ");
+                    }
+                    description.append(nextDescription);
                 }
-                description.append(nextDescription);
             }
         }
-
-        return description.toString();
+        return description.length() > 0 ? description.toString() : "No eligible discounts";
     }
 }

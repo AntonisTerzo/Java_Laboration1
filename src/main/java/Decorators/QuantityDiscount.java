@@ -6,7 +6,7 @@ import Entities.Product;
 public class QuantityDiscount extends BaseDiscount{
     private static final double QUANTITY_DISCOUNT = 10.0;
     private static final int MINIMUM_QUANTITY = 5;
-    private static final String QUANTITY_DESCRIPTION = "Quantity discount(at least " + MINIMUM_QUANTITY + " products): " + QUANTITY_DISCOUNT + "kr per product";
+    private static final String QUANTITY_DESCRIPTION = "Quantity discount(at least " + MINIMUM_QUANTITY + " products) " + QUANTITY_DISCOUNT + "kr per product";
 
     public QuantityDiscount(Discount discount) {
         super(discount);
@@ -23,7 +23,7 @@ public class QuantityDiscount extends BaseDiscount{
     }
 
     @Override
-    protected boolean isApplicable(Product product) {
+    public boolean isApplicable(Product product) {
         return product.quantity() >= MINIMUM_QUANTITY;
     }
 }
