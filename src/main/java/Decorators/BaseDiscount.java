@@ -15,6 +15,8 @@ public abstract class BaseDiscount implements Discount {
 
     protected abstract String getDiscountDescription(Product product);
 
+    protected abstract boolean isApplicable(Product product);
+
     @Override
     public double apply(Product product) {
         double totalDiscount = 0.0;
